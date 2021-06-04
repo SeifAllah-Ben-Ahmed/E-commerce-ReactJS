@@ -1,0 +1,138 @@
+:root {
+    --container-bg-color: #333;
+    --left-bg-color: rgb(56, 31, 48, 0.7);
+    --left-button-hover-color: rgb(56, 31, 48, 0.7);
+    --right-bg-color: rgb(67, 40, 58, 0.7);
+    --right-button-hover-color: rgb(67, 40, 58, 0.7);
+    --hover-width: 75%;
+    --other-width: 25%;
+    --speed: 1000ms;
+}
+
+.container-admin > .split h1 {
+    color: #fff;
+    font-size: 8vw;
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+.button {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    /* height: 2.5rem;
+    padding-top: 1.3rem; */
+    width: 15rem;
+    text-align: center;
+    color: #fff;
+
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    transform: translateX(-50%);
+}
+
+.split.left .button:hover {
+    background-color: var(--left-button-hover-color);
+    border-color: var(--left-button-hover-color);
+}
+
+.split.right .button:hover {
+    background-color: var(--right-button-hover-color);
+    border-color: var(--right-button-hover-color);
+}
+
+.container-admin {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: var(--container-bg-color);
+}
+
+.split {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.split.left {
+    left: 0;
+    background: url("https://i.pinimg.com/originals/04/28/ce/0428ceffc6d070ba4f83e93790dde11c.png")
+        center center no-repeat;
+    background-size: cover;
+}
+
+.split.left:before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: var(--left-bg-color);
+}
+
+.split.right {
+    right: 0;
+    background: url("https://tul.imgix.net/content/article/queen_garnet.jpg?auto=format,compress&w=1200&h=630&fit=crop")
+        center center no-repeat;
+    background-size: cover;
+}
+
+.split.right:before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: var(--right-bg-color);
+}
+
+.split.left,
+.split.right,
+.split.right:before,
+.split.left:before {
+    transition: var(--speed) all ease-in-out;
+}
+
+.hover-left .left {
+    width: var(--hover-width);
+}
+
+.hover-left .right {
+    width: var(--other-width);
+}
+
+.hover-left .right:before {
+    z-index: 2;
+}
+
+.hover-right .right {
+    width: var(--hover-width);
+}
+
+.hover-right .left {
+    width: var(--other-width);
+}
+
+.hover-right .left:before {
+    z-index: 2;
+}
+
+@media (max-width: 800px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .button {
+        width: 12rem;
+    }
+}
+
+@media (max-height: 700px) {
+    .button {
+        top: 70%;
+    }
+}
