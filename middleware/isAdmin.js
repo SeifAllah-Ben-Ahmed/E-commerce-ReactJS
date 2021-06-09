@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
-const isAuth = async (req, res, next) => {
+const isAdmin = async (req, res, next) => {
     try {
         //get token from headers
         const token = req.headers["authorization"];
@@ -31,4 +31,4 @@ const isAuth = async (req, res, next) => {
         res.status(401).send({ errors: [{ msg: " you are not authorized" }] });
     }
 };
-module.exports = isAuth;
+module.exports = isAdmin;

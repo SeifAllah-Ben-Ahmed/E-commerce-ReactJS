@@ -18,6 +18,10 @@ import { current } from "./redux/actions/User";
 import { getAllProduct } from "./redux/actions/Product";
 import UserRoute from "./routes/UserRoute";
 import AdminRoute from "./routes/AdminRoute";
+import Order from "./pages/Order";
+import SuccessPayment from "./pages/SuccessPayment";
+import FailPayment from "./pages/FailPayment";
+import AdminArticle from "./pages/AdminArticle";
 
 function App() {
     const dispatch = useDispatch();
@@ -36,6 +40,9 @@ function App() {
 
                 <Route exact path="/shop" component={Shop} />
                 <Route path="/shop/:name" component={SingleProduct} />
+                <Route path="/order" component={Order} />
+                <Route path="/success" component={SuccessPayment} />
+                <Route path="/canceled" component={FailPayment} />
 
                 <UserRoute exact path="/blog" component={Blog} />
                 <UserRoute path="/blog/:name" component={SingleArticle} />
@@ -43,6 +50,7 @@ function App() {
                 <Route path="/join-us" component={JoinUs} />
                 <AdminRoute exact path="/admin" component={AdminPanel} />
                 <AdminRoute path="/admin/products" component={AdminProduct} />
+                <AdminRoute path="/admin/articles" component={AdminArticle} />
                 <Route path="/*" component={ErrorPage} />
             </Switch>
         </BrowserRouter>

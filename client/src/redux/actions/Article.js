@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+    ADD_ARTICLE,
     DELETE_ARTICLE,
     FAIL_ARTICLE,
     GET_ARTICLE,
@@ -39,6 +40,7 @@ export const getSingleArticle = (articleTitle) => async (dispatch) => {
 };
 export const deleteArticle = (articleTitle) => async (dispatch) => {
     dispatch({ type: LOAD_ARTICLE });
+    console.log(articleTitle);
     try {
         const config = {
             headers: {
@@ -60,9 +62,9 @@ export const editeArticle =
         const formData = new FormData();
         formData.append("title", updatedArticle.title);
         formData.append("content", updatedArticle.content);
-        formData.append("image", updatedArticle.image);
-        formData.append("discription", updatedArticle.contentPlus);
-        formData.append("discription", updatedArticle.type);
+        formData.append("contentPlus", updatedArticle.contentPlus);
+        formData.append("article", updatedArticle.article);
+        formData.append("type", updatedArticle.type);
         // console.log(formData.get("file"));
         const config = {
             headers: {
@@ -83,3 +85,25 @@ export const editeArticle =
             console.log(error.response.data);
         }
     };
+
+export const addArticle = (addArticle) => async (dispatch) => {
+    const formData = new FormData();
+    formData.append("title", addArticle.title);
+    formData.append("content", addArticle.content);
+    formData.append("contentPlus", addArticle.contentPlus);
+    formData.append("article", addArticle.article);
+    formData.append("type", addArticle.type);
+    const config = {
+        headers: {
+            authorization: localStorage.getItem("token"),
+        },
+    };
+    try {
+        const resulte = await axios.post("/api/article/add/", formData, config);
+
+        dispatch({ type: ADD_ARTICLE, payload: resulte.data.msg }); //{UpdateArticle,msg}
+        dispatch(getAllArticles());
+    } catch (error) {
+        dispatch({ type: FAIL_ARTICLE, payload: error.response.data });
+    }
+};

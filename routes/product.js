@@ -14,7 +14,7 @@ const {
     productValidate,
 } = require("../middleware/validateProduct");
 const test = require("../middleware/test");
-const isAuth = require("../middleware/isAuth");
+// const isAuth = require("../middleware/isAuth");
 const router = express.Router();
 
 /*

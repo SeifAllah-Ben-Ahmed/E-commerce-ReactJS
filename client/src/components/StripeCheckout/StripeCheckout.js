@@ -45,10 +45,19 @@ const StripeCheckout = () => {
                     },
                 };
             });
-            const resulte = await axios.post("/api/create-checkout-session", {
-                line_items,
-                customer_email: user.email,
-            });
+            const config = {
+                headers: {
+                    authorization: localStorage.getItem("token"),
+                },
+            };
+            const resulte = await axios.post(
+                "/api/create-checkout-session",
+                {
+                    line_items,
+                    customer_email: user.email,
+                },
+                config
+            );
 
             const { error } = await stripe.redirectToCheckout({
                 sessionId: resulte.data.sessionID,

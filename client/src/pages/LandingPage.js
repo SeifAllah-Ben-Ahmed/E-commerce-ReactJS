@@ -5,6 +5,7 @@ import Header from "../components/Header/Header";
 import Slider from "../components/Slider/Slider";
 
 import Questions from "../components/Q&A/Questions";
+import { Link } from "react-router-dom";
 
 const MainWrapper = styled.main`
     display: flex;
@@ -115,7 +116,9 @@ const LandingPage = () => {
                     }}
                 >
                     <Title>we're all over the shops</Title>
-                    <button className="btn"> Visite Shop</button>
+                    <Link to="/shop">
+                        <button className="btn"> Visite Shop</button>
+                    </Link>
                 </ImageSection>
             </MainWrapper>
         </>

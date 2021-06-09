@@ -1,9 +1,10 @@
 const stripeAPI = require("../config/stripe");
+const Order = require("../models/Order");
 
 async function createCheckoutSession(req, res) {
     const domainURL = process.env.WEB_APP;
     const { line_items, customer_email } = req.body;
-    console.log(line_items);
+
     // check req.body line_items,customer_email
     if (!line_items || !customer_email) {
         return res
@@ -20,14 +21,17 @@ async function createCheckoutSession(req, res) {
             cancel_url: `${domainURL}/canceled`,
             shipping_address_collection: { allowed_countries: ["GB", "US"] },
         });
-        console.log(session);
+
+        const order = await Order.create({
+            sessionID: session.id,
+            lineItems: line_items,
+            customerEmail: customer_email,
+        });
         res.status(201).send({
             msg: "Products payed Successfuly",
             sessionID: session.id,
         });
-        console.log(sessionID);
     } catch (error) {
-        console.log(error);
         res.status(400).send({
             errors: [{ msg: "an error occured, unable to create session" }],
         });

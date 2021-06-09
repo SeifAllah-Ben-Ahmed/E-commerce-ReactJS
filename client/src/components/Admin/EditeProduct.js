@@ -66,13 +66,7 @@ const Textarea = styled.textarea`
     color: white;
 `;
 
-const EditeProduct = ({ item, match }) => {
-    // const oldProdut = {
-    //     name: item.name,
-    //     price: item.price,
-    //     discription: item.discription,
-    // };
-    // console.log(props.match.params.name);
+const EditeProduct = ({ item }) => {
     const [product, setproduct] = useState(item);
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);

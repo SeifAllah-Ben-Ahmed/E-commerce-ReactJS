@@ -95,7 +95,10 @@ const Navbar = () => {
                     </li>
                 </div>
             </nav>
-            <Logo src="./assets/ia_100000002761.png" alt="logo" />
+            <Logo
+                src="http://localhost:3000/assets/ia_100000002761.png"
+                alt="logo"
+            />
             {user.role === "Admin" ? (
                 <Link to="/admin">
                     <AiTwotoneSetting
@@ -151,7 +154,18 @@ const Navbar = () => {
                 </Link>
             )}
             <UserMenu userMenu={userMenu}>
-                <UserMenuItems>order</UserMenuItems>
+                {user.role === "Admin" ? (
+                    <a
+                        target="_blank"
+                        href="https://dashboard.stripe.com/test/dashboard"
+                    >
+                        <UserMenuItems>order</UserMenuItems>
+                    </a>
+                ) : (
+                    <Link to="/order">
+                        <UserMenuItems>order</UserMenuItems>
+                    </Link>
+                )}
                 <UserMenuItems onClick={handleLogOut}>Log Out</UserMenuItems>
             </UserMenu>
         </NavMenu>
